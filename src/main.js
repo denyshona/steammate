@@ -3,16 +3,14 @@ let previousExperience = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, s
 function calculateTotalExperience(team) {
   const now = new Date();
 
-  let maxMilliseconds = 0;
+  let totalMilliseconds = 0;
 
   team.forEach(member => {
     const experienceMilliseconds = now - member.startDate;
-    if (experienceMilliseconds > maxMilliseconds) {
-      maxMilliseconds = experienceMilliseconds;
-    }
+    totalMilliseconds += experienceMilliseconds; // Sum the experience
   });
 
-  const totalSeconds = Math.floor(maxMilliseconds / 1000);
+  const totalSeconds = Math.floor(totalMilliseconds / 1000);
   const seconds = totalSeconds % 60;
   const totalMinutes = Math.floor(totalSeconds / 60);
   const minutes = totalMinutes % 60;
