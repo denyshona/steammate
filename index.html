@@ -1,40 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./public/webstorm-icon-logo.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WS playground</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Team Experience Timer</title>
   <link rel="stylesheet" href="./public/style.css">
+  <link rel="stylesheet" href="./public/animations.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<header class="logo">
-  <a href="https://www.jetbrains.com/webstorm/">
-    <img src="./public/webstorm-logo.svg" alt="WebStorm logo" width="344"
-         height="90">
-  </a>
-</header>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
+<header class="logo"></header>
 <main id="app">
-  <h1 class="title">
-    Thank you for trying it out. <br /> Your first project is up and running
-    now.
-  </h1>
-  <section class="counter">
-    <div class="counter-info">
-      <p class="counter-text">Counter is</p>
-      <p class="counter-value" id="counter-value"></p>
-    </div>
-    <div class="counter-interaction">
-      <button id="increaseByOne" type="button">+1</button>
-      <button id="increaseByTwo" type="button">+2</button>
-      <button id="decreaseByOne" type="button">-1</button>
-      <button id="decreaseByTwo" type="button">-2</button>
+  <section class="counter select-none">
+    <div class="grid grid-cols-6 gap-5 text-center">
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="years">0</span>
+        </div>
+        <span class="text-lg">Years</span>
+      </div>
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="months">0</span>
+        </div>
+        <span class="text-lg">Months</span>
+      </div>
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="days">0</span>
+        </div>
+        <span class="text-lg">Days</span>
+      </div>
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="hours">0</span>
+        </div>
+        <span class="text-lg">Hours</span>
+      </div>
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="minutes">0</span>
+        </div>
+        <span class="text-lg">Minutes</span>
+      </div>
+      <div class="bg-gray-800 rounded-lg text-white flex flex-col p-2">
+        <div class="number-container relative overflow-hidden">
+          <span class="font-mono text-5xl transition-value relative" id="seconds">0</span>
+        </div>
+        <span class="text-lg">Seconds</span>
+      </div>
     </div>
   </section>
 </main>
-<footer class="technologies">
-  <img src="./public/technologies.svg" alt="List of supported technologies">
-</footer>
+<footer class="technologies"></footer>
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>

@@ -1,32 +1,64 @@
-//TIP With Search Everywhere, you can find any action, file, or symbol in your project. Press <shortcut actionId="Shift"/> <shortcut actionId="Shift"/>, type in <b>terminal</b>, and press <shortcut actionId="EditorEnter"/>. Then run <shortcut raw="npm run dev"/> in the terminal and click the link in its output to open the app in the browser.
-export function setupCounter(element) {
-  //TIP Try <shortcut actionId="GotoDeclaration"/> on <shortcut raw="counter"/> to see its usages. You can also use this shortcut to jump to a declaration – try it on <shortcut raw="counter"/> on line 13.
-  let counter = 0;
+let previousExperience = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
 
-  const adjustCounterValue = value => {
-    if (value >= 100) return value - 100;
-    if (value <= -100) return value + 100;
-    return value;
-  };
+function calculateTotalExperience(team) {
+  const now = new Date();
 
-  const setCounter = value => {
-    counter = adjustCounterValue(value);
-    //TIP WebStorm has lots of inspections to help you catch issues in your project. It also has quick fixes to help you resolve them. Press <shortcut actionId="ShowIntentionActions"/> on <shortcut raw="text"/> and choose <b>Inline variable</b> to clean up the redundant code.
-    const text = `${counter}`;
-    element.innerHTML = text;
-  };
+  let maxMilliseconds = 0;
 
-  document.getElementById('increaseByOne').addEventListener('click', () => setCounter(counter + 1));
-  document.getElementById('decreaseByOne').addEventListener('click', () => setCounter(counter - 1));
-  document.getElementById('increaseByTwo').addEventListener('click', () => setCounter(counter + 2));
-  //TIP In the app running in the browser, you’ll find that clicking <b>-2</b> doesn't work. To fix that, rewrite it using the code from lines 19 - 21 as examples of the logic.
-  document.getElementById('decreaseByTwo')
+  team.forEach(member => {
+    const experienceMilliseconds = now - member.startDate;
+    if (experienceMilliseconds > maxMilliseconds) {
+      maxMilliseconds = experienceMilliseconds;
+    }
+  });
 
-  //TIP Let’s see how to review and commit your changes. Press <shortcut actionId="GotoAction"/> and look for <b>commit</b>. Try checking the diff for a file – double-click main.js to do that.
-  setCounter(0);
+  const totalSeconds = Math.floor(maxMilliseconds / 1000);
+  const seconds = totalSeconds % 60;
+  const totalMinutes = Math.floor(totalSeconds / 60);
+  const minutes = totalMinutes % 60;
+  const totalHours = Math.floor(totalMinutes / 60);
+  const hours = totalHours % 24;
+  const totalDays = Math.floor(totalHours / 24);
+  const days = totalDays % 30;
+  const totalMonths = Math.floor(totalDays / 30);
+  const months = totalMonths % 12;
+  const years = Math.floor(totalMonths / 12);
+
+  return { years, months, days, hours, minutes, seconds };
 }
 
-//TIP To find text strings in your project, you can use the <shortcut actionId="FindInPath"/> shortcut. Press it and type in <b>counter</b> – you’ll get all matches in one place.
-setupCounter(document.getElementById('counter-value'));
+function applyTransition(element, newValue, previousValue) {
+  if (newValue !== previousValue) {
+    element.classList.remove('slide-up', 'slide-down');
+    element.classList.add('slide-up');
 
-//TIP There's much more in WebStorm to help you be more productive. Press <shortcut actionId="Shift"/> <shortcut actionId="Shift"/> and search for <b>Learn WebStorm</b> to open our learning hub with more things for you to try.
+    setTimeout(() => {
+      element.textContent = newValue;
+      element.classList.remove('slide-up');
+      element.classList.add('slide-down');
+    }, 300);
+  }
+}
+
+function updateExperienceTimer() {
+  const experience = calculateTotalExperience(teamMembers);
+
+  applyTransition(document.getElementById('years'), experience.years, previousExperience.years);
+  applyTransition(document.getElementById('months'), experience.months, previousExperience.months);
+  applyTransition(document.getElementById('days'), experience.days, previousExperience.days);
+  applyTransition(document.getElementById('hours'), experience.hours, previousExperience.hours);
+  applyTransition(document.getElementById('minutes'), experience.minutes, previousExperience.minutes);
+  applyTransition(document.getElementById('seconds'), experience.seconds, previousExperience.seconds);
+
+  previousExperience = { ...experience };
+}
+
+const teamMembers = [
+  { name: 'Olha', startDate: new Date('2021-08-10T09:00:00') },  // 10 серпня 2021
+  { name: 'Nazar', startDate: new Date('2024-07-22T09:00:00') },  // 22 липня 2024
+  { name: 'Iren', startDate: new Date('2022-02-01T09:00:00') },   // 1 лютого 2022
+  { name: 'Denys', startDate: new Date('2023-07-13T09:00:00') },  // 13 липня 2023
+  { name: 'Vlada', startDate: new Date('2023-01-01T09:00:00') }, // 1 січня 2024
+];
+
+setInterval(updateExperienceTimer, 1000);
