@@ -54,11 +54,13 @@ function updateExperienceTimer() {
 }
 
 const teamMembers = [
-  { name: 'Olha', startDate: new Date('2021-08-10T09:00:00') },  // 10 серпня 2021
-  { name: 'Nazar', startDate: new Date('2024-07-22T09:00:00') },  // 22 липня 2024
-  { name: 'Iren', startDate: new Date('2022-02-01T09:00:00') },   // 1 лютого 2022
-  { name: 'Denys', startDate: new Date('2023-07-13T09:00:00') },  // 13 липня 2023
-  { name: 'Vlada', startDate: new Date('2023-01-01T09:00:00') }, // 1 січня 2024
+  { name: 'Olha', startDate: new Date('2021-08-10T09:00:00') },
+  { name: 'Nazar', startDate: new Date('2024-07-22T09:00:00') },
+  { name: 'Iren', startDate: new Date('2022-02-01T09:00:00') },
+  { name: 'Denys', startDate: new Date('2023-07-13T09:00:00') },
+  { name: 'Valera', startDate: new Date('2024-06-05T09:00:00') },
+  { name: 'Ira', startDate: new Date('2019-11-25T09:00:00') },
+  { name: 'Vlada', startDate: new Date('2024-01-01T09:00:00') }
 ];
 
 setInterval(updateExperienceTimer, 1000);
